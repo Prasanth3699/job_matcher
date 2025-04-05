@@ -1,0 +1,175 @@
+PyTorch version 2.6.0 available.
+PyTorch version 2.6.0 available.
+PyTorch version 2.6.0 available.
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:15:52.310033Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:16:06.772775Z"}
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:16:28.974240Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:16:42.928366Z"}
+PyTorch version 2.6.0 available.
+Request error fetching job 511: All connection attempts failed
+Request error fetching job 512: All connection attempts failed
+Request error fetching job 513: All connection attempts failed
+{"event": "No jobs found for the provided job IDs: [511, 512, 513]", "logger": "app.api.v1.endpoints.matching", "level": "warning", "timestamp": "2025-04-02T18:17:46.834290Z"}
+{"event": "Error fetching job details: 404: {'detail': 'No jobs found for the provided job IDs', 'error_type': 'NotFoundError', 'context': None, 'solution': None}", "logger": "app.api.v1.endpoints.matching", "level": "error", "timestamp": "2025-04-02T18:17:46.834861Z"}
+Request error fetching job 511: All connection attempts failed
+Request error fetching job 512: All connection attempts failed
+Request error fetching job 513: All connection attempts failed
+{"event": "No jobs found for the provided job IDs: [511, 512, 513]", "logger": "app.api.v1.endpoints.matching", "level": "warning", "timestamp": "2025-04-02T18:17:58.287003Z"}
+{"event": "Error fetching job details: 404: {'detail': 'No jobs found for the provided job IDs', 'error_type': 'NotFoundError', 'context': None, 'solution': None}", "logger": "app.api.v1.endpoints.matching", "level": "error", "timestamp": "2025-04-02T18:17:58.287563Z"}
+{"event": "Loading semantic models...", "logger": "app.api.v1.endpoints.matching", "level": "info", "timestamp": "2025-04-02T18:21:28.585582Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.api.v1.endpoints.matching", "level": "info", "timestamp": "2025-04-02T18:21:42.180734Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/719 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/720 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/718 "HTTP/1.1 200 OK"
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:23:55.419603Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:24:09.014433Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/719 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/720 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/718 "HTTP/1.1 200 OK"
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:27:22.001532Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:27:37.339450Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/719 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/720 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/718 "HTTP/1.1 200 OK"
+PyTorch version 2.6.0 available.
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:33:27.041715Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:33:39.240506Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/719 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/720 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/718 "HTTP/1.1 200 OK"
+PyTorch version 2.6.0 available.
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:39:13.308546Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:39:27.341260Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/719 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/720 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/718 "HTTP/1.1 200 OK"
+PyTorch version 2.6.0 available.
+PyTorch version 2.6.0 available.
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:44:48.678242Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:45:00.822483Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/719 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/720 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/718 "HTTP/1.1 200 OK"
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:48:25.467192Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:48:37.650348Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/730 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/729 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/726 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/725 "HTTP/1.1 200 OK"
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:50:22.561171Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:50:34.553987Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/730 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/731 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/729 "HTTP/1.1 200 OK"
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:51:48.624627Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:52:00.319779Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/725 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/726 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/730 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/729 "HTTP/1.1 200 OK"
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:53:26.743326Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:53:59.424225Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-02T18:54:11.779212Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/719 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/720 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/718 "HTTP/1.1 200 OK"
+PyTorch version 2.6.0 available.
+PyTorch version 2.6.0 available.
+PyTorch version 2.6.0 available.
+PyTorch version 2.6.0 available.
+PyTorch version 2.6.0 available.
