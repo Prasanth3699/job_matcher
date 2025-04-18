@@ -13,6 +13,8 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     try:
         # Validate token via auth service
         user_data = await AuthService.validate_token(token)
+        # Include the raw token in user data
+        user_data["token"] = token
         return user_data
     except HTTPException:
         raise HTTPException(

@@ -15,7 +15,7 @@ class JobService:
     """Service for interacting with the Jobs API with enhanced content cleaning"""
 
     @staticmethod
-    async def fetch_jobs(job_ids: List[int]) -> List[Job]:
+    async def fetch_jobs(job_ids: List[int], token: str) -> List[Job]:
         """Fetch job details from the Jobs API and clean the descriptions"""
         jobs = []
 
@@ -26,7 +26,11 @@ class JobService:
         async with httpx.AsyncClient(base_url=settings.JOBS_SERVICE_URL) as client:
             for job_id in job_ids:
                 try:
-                    response = await client.get(f"/api/v1/jobs/{job_id}", timeout=10.0)
+                    response = await client.get(
+                        f"/api/v1/jobs/match/{job_id}",
+                        headers={"Authorization": f"Bearer {token}"},
+                        timeout=10.0,
+                    )
 
                     if response.status_code == 200:
                         job_data = response.json()

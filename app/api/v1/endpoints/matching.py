@@ -35,6 +35,7 @@ from app.schemas.matching import (
 )
 from app.utils.file_helpers import cleanup_temp_file
 
+# from .auth import oauth2_scheme
 
 router = APIRouter(
     tags=["matching"],
@@ -144,7 +145,7 @@ async def new_match_endpoint(
         }
 
         # Process jobs with proper field mapping
-        jobs = await JobService.fetch_jobs(job_ids_list)
+        jobs = await JobService.fetch_jobs(job_ids_list, current_user["token"])
         processed_jobs = []
 
         for job in jobs:

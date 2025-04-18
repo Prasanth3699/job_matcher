@@ -173,3 +173,180 @@ PyTorch version 2.6.0 available.
 PyTorch version 2.6.0 available.
 PyTorch version 2.6.0 available.
 PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-05T17:47:33.390204Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-05T17:47:45.705932Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/805 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/806 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/804 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/803 "HTTP/1.1 200 OK"
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-05T19:14:36.728713Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-05T19:14:45.644224Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/819 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/815 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/814 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/813 "HTTP/1.1 200 OK"
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-07T02:29:22.275696Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-07T02:29:37.236523Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/853 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/852 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/851 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/850 "HTTP/1.1 200 OK"
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-07T02:31:20.315936Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-07T02:31:32.558166Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/853 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/851 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/850 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/848 "HTTP/1.1 200 OK"
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-09T18:51:28.515602Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-09T18:51:41.494067Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/906 "HTTP/1.1 401 Unauthorized"
+Error fetching job 906: Status 401, Response: {"detail":"Not authenticated"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/907 "HTTP/1.1 401 Unauthorized"
+Error fetching job 907: Status 401, Response: {"detail":"Not authenticated"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/908 "HTTP/1.1 401 Unauthorized"
+Error fetching job 908: Status 401, Response: {"detail":"Not authenticated"}
+PyTorch version 2.6.0 available.
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-17T16:51:39.134131Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-17T16:51:51.718516Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1093 "HTTP/1.1 404 Not Found"
+Error fetching job 1093: Status 404, Response: {"detail":"Not Found"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1094 "HTTP/1.1 404 Not Found"
+Error fetching job 1094: Status 404, Response: {"detail":"Not Found"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1092 "HTTP/1.1 404 Not Found"
+Error fetching job 1092: Status 404, Response: {"detail":"Not Found"}
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-17T17:04:24.906955Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-17T17:04:34.731480Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1093 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1094 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1092 "HTTP/1.1 200 OK"
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-17T17:39:02.166207Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-17T17:39:10.390049Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1093 "HTTP/1.1 401 Unauthorized"
+Error fetching job 1093: Status 401, Response: {"detail":"Not authenticated"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1094 "HTTP/1.1 401 Unauthorized"
+Error fetching job 1094: Status 401, Response: {"detail":"Not authenticated"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1092 "HTTP/1.1 401 Unauthorized"
+Error fetching job 1092: Status 401, Response: {"detail":"Not authenticated"}
+PyTorch version 2.6.0 available.
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-17T17:40:36.718465Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-17T17:40:45.445620Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1093 "HTTP/1.1 401 Unauthorized"
+Error fetching job 1093: Status 401, Response: {"detail":"Could not validate credentials"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1094 "HTTP/1.1 401 Unauthorized"
+Error fetching job 1094: Status 401, Response: {"detail":"Could not validate credentials"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1092 "HTTP/1.1 401 Unauthorized"
+Error fetching job 1092: Status 401, Response: {"detail":"Could not validate credentials"}
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-17T17:43:40.473020Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-17T17:43:48.917491Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+{"exc_info": true, "event": "Matching failed: 'token'", "logger": "app.core.matching.semantic_matcher", "level": "error", "timestamp": "2025-04-17T17:43:49.454807Z"}
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-17T17:45:32.629676Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-17T17:45:42.655401Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1093 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1094 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1092 "HTTP/1.1 200 OK"
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-17T17:51:02.022048Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-17T17:51:27.949821Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1105 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1106 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1104 "HTTP/1.1 200 OK"
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-18T15:35:43.505378Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-18T15:35:52.834105Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1133 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1132 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1131 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1130 "HTTP/1.1 200 OK"
