@@ -93,7 +93,7 @@ async def match_resume_upload(
                 error_type="ValidationError",
                 context=str(e),
                 solution="Check all required fields and data types",
-            ).dict(),
+            ).model_dump(),
         )
     except Exception as exc:
         logger.error(f"Resume matching failed: {str(exc)}", exc_info=exc)
@@ -101,7 +101,7 @@ async def match_resume_upload(
             status_code=500,
             detail=MatchErrorResponse(
                 detail="Resume matching failed", error_type="InternalServerError"
-            ).dict(),
+            ).model_dump(),
         )
     finally:
         if resume_file.exists():
@@ -134,7 +134,7 @@ async def match_resume_to_job(
                 status_code=400,
                 detail=MatchErrorResponse(
                     detail="No file name provided", error_type="ValidationError"
-                ).dict(),
+                ).model_dump(),
             )
 
         if resume_file.size == 0:
@@ -142,7 +142,7 @@ async def match_resume_to_job(
                 status_code=400,
                 detail=MatchErrorResponse(
                     detail="Uploaded file is empty", error_type="ValidationError"
-                ).dict(),
+                ).model_dump(),
             )
 
         file_extension = resume_file.filename.split(".")[-1].lower()
@@ -152,7 +152,7 @@ async def match_resume_to_job(
                 detail=MatchErrorResponse(
                     detail="Unsupported file format. Only PDF, DOCX, and TXT are allowed",
                     error_type="ValidationError",
-                ).dict(),
+                ).model_dump(),
             )
 
         # Parse JSON inputs
@@ -167,7 +167,7 @@ async def match_resume_to_job(
                     error_type="ValidationError",
                     context=str(e),
                     solution="Please validate your JSON input",
-                ).dict(),
+                ).model_dump(),
             )
 
         # Process file content and validate models
@@ -187,7 +187,7 @@ async def match_resume_to_job(
                     error_type="ValidationError",
                     context=str(e),
                     solution="Check all required fields and data types",
-                ).dict(),
+                ).model_dump(),
             )
 
         # Create temporary file
@@ -202,7 +202,7 @@ async def match_resume_to_job(
                 detail=MatchErrorResponse(
                     detail="Failed to process uploaded file",
                     error_type="InternalServerError",
-                ).dict(),
+                ).model_dump(),
             )
 
         # Parse and extract resume
@@ -217,7 +217,7 @@ async def match_resume_to_job(
                     error_type="ValidationError",
                     context=str(e),
                     solution="Please check your resume file format and content",
-                ).dict(),
+                ).model_dump(),
             )
 
         # Prepare resume features
@@ -258,7 +258,7 @@ async def match_resume_to_job(
                     error_type="InternalServerError",
                     context=str(e),
                     solution="Please try again or contact support",
-                ).dict(),
+                ).model_dump(),
             )
 
         if not results:
@@ -266,7 +266,7 @@ async def match_resume_to_job(
                 status_code=404,
                 detail=MatchErrorResponse(
                     detail="No matching results found", error_type="NotFound"
-                ).dict(),
+                ).model_dump(),
             )
 
         return results[0]

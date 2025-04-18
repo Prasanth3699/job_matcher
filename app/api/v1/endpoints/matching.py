@@ -93,7 +93,7 @@ async def get_match_history(
         500: {"model": MatchErrorResponse},
     },
 )
-async def new_match_endpoint(
+async def new_match(
     resume_file: UploadFile = File(...),
     job_ids: str = Form(...),
     preferences: str = Form(...),
@@ -105,7 +105,21 @@ async def new_match_endpoint(
     current_user: dict = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    """Endpoint that properly handles the matching service response structure"""
+    """Match a resume to job postings based on user preferences and job IDs.
+    Args:
+        resume_file (UploadFile): The uploaded resume file.
+        job_ids (str): Comma-separated list of job IDs.
+        preferences (str): User preferences in JSON format.
+        resume_parser (ResumeParser): Resume parser dependency.
+        resume_extractor (ResumeExtractor): Resume extractor dependency.
+        job_processor (JobProcessingService): Job processing service dependency.
+        matching_service (MatchingService): Matching service dependency.
+        background_tasks (BackgroundTasks): Background tasks dependency.
+        current_user (dict): Current user information.
+        db (Session): Database session.
+    Returns:
+        List[JobMatchResult]: List of matched job postings.
+    """
     temp_path = None
     try:
         # Input validation (same as before)

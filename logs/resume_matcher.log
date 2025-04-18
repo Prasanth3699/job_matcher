@@ -350,3 +350,4 @@ HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1133 "HTTP/1.1 200 OK"
 HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1132 "HTTP/1.1 200 OK"
 HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1131 "HTTP/1.1 200 OK"
 HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1130 "HTTP/1.1 200 OK"
+PyTorch version 2.6.0 available.
