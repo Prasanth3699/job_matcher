@@ -351,3 +351,302 @@ HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1132 "HTTP/1.1 200 OK"
 HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1131 "HTTP/1.1 200 OK"
 HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1130 "HTTP/1.1 200 OK"
 PyTorch version 2.6.0 available.
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T12:19:24.992207Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T12:19:34.397931Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+{"event": "Extracted skills using fallback method: {'ci', 'https', 'programming', 'authentication', 'architecture', 'tests', 'optimization', 'redis', 'service', 'sql', 'software', 'pipelines', 'django', 'git', 'data management', 'logging', 'linkedin', 'inventory management', 'python', 'github', 'user management', 'fintech', 'gcp', 'mysql', 'reliability', 'rest', 'cd', 'security', 'aws', 'mongodb', 'jenkins', 'information technology', 'jwt', 'cloud services', 'education', 'java', 'programming languages', 'spring boot', 'postgresql', 'system', 'javascript', 'integration', 'framework', 'api'}", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T12:19:36.024115Z"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1133 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1132 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1130 "HTTP/1.1 200 OK"
+{"event": "Skipping invalid job: 'responsibilitys'", "logger": "app.core.matching.semantic_matcher", "level": "warning", "timestamp": "2025-04-19T12:19:44.548483Z"}
+{"event": "Skipping invalid job: 'responsibilitys'", "logger": "app.core.matching.semantic_matcher", "level": "warning", "timestamp": "2025-04-19T12:19:46.554798Z"}
+{"event": "Skipping invalid job: 'responsibilitys'", "logger": "app.core.matching.semantic_matcher", "level": "warning", "timestamp": "2025-04-19T12:19:57.449441Z"}
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:07:03.601636Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:07:12.841993Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+{"event": "Extracted skills using fallback method: {'ci', 'https', 'programming', 'authentication', 'architecture', 'tests', 'optimization', 'redis', 'service', 'sql', 'software', 'pipelines', 'django', 'git', 'data management', 'logging', 'linkedin', 'inventory management', 'python', 'github', 'user management', 'fintech', 'gcp', 'mysql', 'reliability', 'rest', 'cd', 'security', 'aws', 'mongodb', 'jenkins', 'information technology', 'jwt', 'cloud services', 'education', 'java', 'programming languages', 'spring boot', 'postgresql', 'system', 'javascript', 'integration', 'framework', 'api'}", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:07:13.768437Z"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1133 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1132 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1130 "HTTP/1.1 200 OK"
+{"event": "Skipping invalid job: 'responsibilitys'", "logger": "app.core.matching.semantic_matcher", "level": "warning", "timestamp": "2025-04-19T13:07:19.918016Z"}
+{"event": "Skipping invalid job: 'responsibilitys'", "logger": "app.core.matching.semantic_matcher", "level": "warning", "timestamp": "2025-04-19T13:07:22.266194Z"}
+{"event": "Skipping invalid job: 'responsibilitys'", "logger": "app.core.matching.semantic_matcher", "level": "warning", "timestamp": "2025-04-19T13:07:33.731466Z"}
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:08:58.672640Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:09:09.257596Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+{"event": "Extracted skills using fallback method: {'linkedin', 'django', 'cd', 'information technology', 'programming languages', 'programming', 'github', 'inventory management', 'data management', 'spring boot', 'framework', 'postgresql', 'user management', 'rest', 'jenkins', 'git', 'sql', 'reliability', 'tests', 'redis', 'mongodb', 'software', 'gcp', 'aws', 'architecture', 'jwt', 'pipelines', 'cloud services', 'mysql', 'system', 'logging', 'https', 'integration', 'authentication', 'ci', 'security', 'api', 'java', 'optimization', 'python', 'javascript', 'fintech', 'service', 'education'}", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:09:10.221614Z"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1133 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1132 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1130 "HTTP/1.1 200 OK"
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:14:57.515467Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:15:06.550238Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+{"event": "Extracted skills using fallback method: {'authentication', 'ci', 'linkedin', 'tests', 'pipelines', 'gcp', 'logging', 'data management', 'git', 'api', 'integration', 'rest', 'java', 'programming languages', 'fintech', 'service', 'security', 'programming', 'user management', 'python', 'software', 'spring boot', 'cloud services', 'postgresql', 'system', 'javascript', 'aws', 'sql', 'cd', 'jwt', 'redis', 'information technology', 'jenkins', 'reliability', 'mongodb', 'framework', 'optimization', 'mysql', 'github', 'https', 'inventory management', 'architecture', 'education', 'django'}", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:15:07.413749Z"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1133 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1132 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1130 "HTTP/1.1 200 OK"
+{"event": "Skipping invalid job: 'JobParser' object has no attribute '_generate_job_id'", "logger": "app.core.matching.semantic_matcher", "level": "warning", "timestamp": "2025-04-19T13:15:08.105575Z"}
+{"event": "Skipping invalid job: 'JobParser' object has no attribute '_generate_job_id'", "logger": "app.core.matching.semantic_matcher", "level": "warning", "timestamp": "2025-04-19T13:15:08.106136Z"}
+{"event": "Skipping invalid job: 'JobParser' object has no attribute '_generate_job_id'", "logger": "app.core.matching.semantic_matcher", "level": "warning", "timestamp": "2025-04-19T13:15:08.106682Z"}
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:19:12.075191Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:19:21.411174Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+{"event": "Extracted skills using fallback method: {'optimization', 'programming languages', 'django', 'information technology', 'linkedin', 'service', 'reliability', 'user management', 'api', 'java', 'inventory management', 'architecture', 'pipelines', 'mysql', 'education', 'logging', 'javascript', 'sql', 'security', 'integration', 'cd', 'data management', 'software', 'ci', 'jenkins', 'redis', 'mongodb', 'gcp', 'github', 'rest', 'git', 'aws', 'tests', 'postgresql', 'python', 'spring boot', 'framework', 'programming', 'authentication', 'https', 'cloud services', 'fintech', 'system', 'jwt'}", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:19:22.223091Z"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1133 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1132 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1130 "HTTP/1.1 200 OK"
+{"event": "Skipping invalid job: 'JobParser' object has no attribute '_parse_job_type'", "logger": "app.core.matching.semantic_matcher", "level": "warning", "timestamp": "2025-04-19T13:19:22.938298Z"}
+{"event": "Skipping invalid job: 'JobParser' object has no attribute '_parse_job_type'", "logger": "app.core.matching.semantic_matcher", "level": "warning", "timestamp": "2025-04-19T13:19:22.939392Z"}
+{"event": "Skipping invalid job: 'JobParser' object has no attribute '_parse_job_type'", "logger": "app.core.matching.semantic_matcher", "level": "warning", "timestamp": "2025-04-19T13:19:22.941102Z"}
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:20:43.138392Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:20:52.235725Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+{"event": "Extracted skills using fallback method: {'api', 'optimization', 'cd', 'rest', 'jwt', 'user management', 'javascript', 'java', 'architecture', 'service', 'git', 'linkedin', 'fintech', 'system', 'education', 'programming languages', 'spring boot', 'software', 'authentication', 'gcp', 'integration', 'pipelines', 'https', 'security', 'inventory management', 'information technology', 'python', 'cloud services', 'reliability', 'framework', 'sql', 'github', 'ci', 'data management', 'redis', 'programming', 'postgresql', 'jenkins', 'aws', 'django', 'logging', 'mysql', 'tests', 'mongodb'}", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:20:52.990693Z"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1133 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1132 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1130 "HTTP/1.1 200 OK"
+{"event": "Skipping invalid job: 'JobParser' object has no attribute '_parse_salary'", "logger": "app.core.matching.semantic_matcher", "level": "warning", "timestamp": "2025-04-19T13:20:53.624605Z"}
+{"event": "Skipping invalid job: 'JobParser' object has no attribute '_parse_salary'", "logger": "app.core.matching.semantic_matcher", "level": "warning", "timestamp": "2025-04-19T13:20:53.625186Z"}
+{"event": "Skipping invalid job: 'JobParser' object has no attribute '_parse_salary'", "logger": "app.core.matching.semantic_matcher", "level": "warning", "timestamp": "2025-04-19T13:20:53.626328Z"}
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:24:11.467047Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:24:21.204955Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+{"event": "Extracted skills using fallback method: {'ci', 'api', 'javascript', 'integration', 'https', 'logging', 'user management', 'architecture', 'mysql', 'information technology', 'git', 'jenkins', 'software', 'reliability', 'mongodb', 'security', 'redis', 'sql', 'rest', 'programming languages', 'tests', 'service', 'linkedin', 'education', 'inventory management', 'jwt', 'spring boot', 'cloud services', 'pipelines', 'fintech', 'framework', 'optimization', 'postgresql', 'github', 'programming', 'gcp', 'cd', 'system', 'data management', 'authentication', 'django', 'python', 'java', 'aws'}", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:24:21.980987Z"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1133 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1132 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1130 "HTTP/1.1 200 OK"
+ZSL failed on 'ABOUT US We are Alter Domus. Meaning The Other House in Latin, Alter Domus is proud to be home to 85% of the top 30 asset managers in the alternatives industry, and more than 5,000 professionals across 23 countries. With a deep understanding of what it takes to succeed in alternatives, we believe in being different. Invest yourself in the alternative, and join an organization where you progress on merit, where you can speak openly with whoever you are speaking to, and where you will be supported along whichever path you choose to take. Find out more about life at Alter Domus at careers.alterdomus.com Responsibilities:  Plan, design, code, and execute tests, including user interfaces, business logic, and data access according to application need for Solvas': 'responsibilitys'
+ZSL failed on 'Provide efficient reports on defect status, team progress, and own assignments': 'responsibilitys'
+ZSL failed on 'Recommend solutions for test management, execution, and reporting': 'responsibilitys'
+ZSL failed on 'Perform quality assurance and end': 'responsibilitys'
+ZSL failed on 'Pass out year': 'responsibilitys'
+ZSL failed on 'Equity in every sense of the word We are in the business of equity, in every sense of the word. For us, this means taking action to ensure every colleague has equal opportunity, valuing every voice and experience across our organisation, maintaining an inclusive culture where you can bring your whole self to work, and making Alter Domus a workplace where everyone feels they belong. We celebrate our differences, and understand that our success relies on diverse perspectives and experiences, working towards shared goals and a common purpose. Thanks to the work of our Group DE&amp;I Committee and network of DE&amp;I Champions, we empower all of our people to be truly invested in the alternative. We are committed to ensuring an inclusive recruiting and onboarding process. Please contact our hiring team if you require any accommodations to make our recruitment process more accessible for you. (Alter Domus Privacy notice can be reviewed via Alter Domus webpage: https://alterdomus.com/privacy': 'responsibilitys'
+ZSL failed on 'Abouts Us: Arrise Solutions India Pvt. Ltd. (powering PragmaticPlay) is a leading content provider to the iGaming and Betting Industry, offering a multi': 'responsibilitys'
+ZSL failed on 'focused. Pragmatic Play strives to create the most engaging and evocative experience for customers globally across a range of products, including slots, live casino, sports betting, virtual sports and bingo. About the role: As a part of an international software development agile team. You will be responsible for ensuring that our products, applications, and systems work correctly. You will focus on finding, reporting bugs and glitches, preparing concepts of improvements that will make usability better for the end user or application. Key Responsibilities:  Analyzing test results and reporting to the development team': 'responsibilitys'
+ZSL failed on 'centric web applications. You will work closely with designers, developers, and stakeholders to ensure seamless user experiences and robust functionality. Key Responsibilities:  Front': 'responsibilitys'
+ZSL failed on 'Collaboratewith product management, fellow developers, and designers in conceptualizing and developing new software programs and applications.': 'responsibilitys'
+ZSL failed on 'Continuous Improvement: Analyze user behavior data and iterate designs to enhance usability. Research and integrate emerging front': 'responsibilitys'
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:26:57.846732Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:27:06.574412Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+{"event": "Extracted skills using fallback method: {'ci', 'api', 'javascript', 'integration', 'https', 'logging', 'user management', 'architecture', 'mysql', 'information technology', 'git', 'jenkins', 'software', 'reliability', 'mongodb', 'security', 'redis', 'sql', 'rest', 'programming languages', 'tests', 'service', 'linkedin', 'education', 'inventory management', 'jwt', 'spring boot', 'cloud services', 'pipelines', 'fintech', 'framework', 'optimization', 'postgresql', 'github', 'programming', 'gcp', 'cd', 'system', 'data management', 'authentication', 'django', 'python', 'java', 'aws'}", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:27:07.322464Z"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1133 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1132 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1130 "HTTP/1.1 200 OK"
+ZSL failed on 'ABOUT US We are Alter Domus. Meaning The Other House in Latin, Alter Domus is proud to be home to 85% of the top 30 asset managers in the alternatives industry, and more than 5,000 professionals across 23 countries. With a deep understanding of what it takes to succeed in alternatives, we believe in being different. Invest yourself in the alternative, and join an organization where you progress on merit, where you can speak openly with whoever you are speaking to, and where you will be supported along whichever path you choose to take. Find out more about life at Alter Domus at careers.alterdomus.com Responsibilities:  Plan, design, code, and execute tests, including user interfaces, business logic, and data access according to application need for Solvas': 'responsibilitys'
+ZSL failed on 'Provide efficient reports on defect status, team progress, and own assignments': 'responsibilitys'
+ZSL failed on 'Recommend solutions for test management, execution, and reporting': 'responsibilitys'
+ZSL failed on 'Perform quality assurance and end': 'responsibilitys'
+ZSL failed on 'Pass out year': 'responsibilitys'
+ZSL failed on 'Equity in every sense of the word We are in the business of equity, in every sense of the word. For us, this means taking action to ensure every colleague has equal opportunity, valuing every voice and experience across our organisation, maintaining an inclusive culture where you can bring your whole self to work, and making Alter Domus a workplace where everyone feels they belong. We celebrate our differences, and understand that our success relies on diverse perspectives and experiences, working towards shared goals and a common purpose. Thanks to the work of our Group DE&amp;I Committee and network of DE&amp;I Champions, we empower all of our people to be truly invested in the alternative. We are committed to ensuring an inclusive recruiting and onboarding process. Please contact our hiring team if you require any accommodations to make our recruitment process more accessible for you. (Alter Domus Privacy notice can be reviewed via Alter Domus webpage: https://alterdomus.com/privacy': 'responsibilitys'
+ZSL failed on 'Abouts Us: Arrise Solutions India Pvt. Ltd. (powering PragmaticPlay) is a leading content provider to the iGaming and Betting Industry, offering a multi': 'responsibilitys'
+ZSL failed on 'focused. Pragmatic Play strives to create the most engaging and evocative experience for customers globally across a range of products, including slots, live casino, sports betting, virtual sports and bingo. About the role: As a part of an international software development agile team. You will be responsible for ensuring that our products, applications, and systems work correctly. You will focus on finding, reporting bugs and glitches, preparing concepts of improvements that will make usability better for the end user or application. Key Responsibilities:  Analyzing test results and reporting to the development team': 'responsibilitys'
+ZSL failed on 'centric web applications. You will work closely with designers, developers, and stakeholders to ensure seamless user experiences and robust functionality. Key Responsibilities:  Front': 'responsibilitys'
+ZSL failed on 'Collaboratewith product management, fellow developers, and designers in conceptualizing and developing new software programs and applications.': 'responsibilitys'
+ZSL failed on 'Continuous Improvement: Analyze user behavior data and iterate designs to enhance usability. Research and integrate emerging front': 'responsibilitys'
+PyTorch version 2.6.0 available.
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:53:26.836574Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:53:37.572713Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+{"event": "Extracted skills using fallback method: {'https', 'api', 'gcp', 'linkedin', 'security', 'programming languages', 'integration', 'redis', 'software', 'spring boot', 'fintech', 'cd', 'ci', 'aws', 'javascript', 'programming', 'data management', 'logging', 'java', 'jenkins', 'mysql', 'architecture', 'github', 'django', 'authentication', 'reliability', 'system', 'information technology', 'sql', 'optimization', 'framework', 'service', 'python', 'inventory management', 'education', 'user management', 'rest', 'postgresql', 'mongodb', 'pipelines', 'jwt', 'git', 'cloud services', 'tests'}", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T13:53:38.668697Z"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1133 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1132 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1130 "HTTP/1.1 200 OK"
+Failed to parse job: 
+**********************************************************************
+  Resource [93mpunkt_tab[0m not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  [31m>>> import nltk
+  >>> nltk.download('punkt_tab')
+  [0m
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load [93mtokenizers/punkt_tab/english/[0m
+
+  Searched in:
+    - 'C:\\Users\\Prasanth/nltk_data'
+    - 'D:\\advance_code\\venv\\nltk_data'
+    - 'D:\\advance_code\\venv\\share\\nltk_data'
+    - 'D:\\advance_code\\venv\\lib\\nltk_data'
+    - 'C:\\Users\\Prasanth\\AppData\\Roaming\\nltk_data'
+    - 'C:\\nltk_data'
+    - 'D:\\nltk_data'
+    - 'E:\\nltk_data'
+**********************************************************************
+
+{"event": "Skipping invalid job: Job parsing failed: \n**********************************************************************\n  Resource \u001b[93mpunkt_tab\u001b[0m not found.\n  Please use the NLTK Downloader to obtain the resource:\n\n  \u001b[31m>>> import nltk\n  >>> nltk.download('punkt_tab')\n  \u001b[0m\n  For more information see: https://www.nltk.org/data.html\n\n  Attempted to load \u001b[93mtokenizers/punkt_tab/english/\u001b[0m\n\n  Searched in:\n    - 'C:\\\\Users\\\\Prasanth/nltk_data'\n    - 'D:\\\\advance_code\\\\venv\\\\nltk_data'\n    - 'D:\\\\advance_code\\\\venv\\\\share\\\\nltk_data'\n    - 'D:\\\\advance_code\\\\venv\\\\lib\\\\nltk_data'\n    - 'C:\\\\Users\\\\Prasanth\\\\AppData\\\\Roaming\\\\nltk_data'\n    - 'C:\\\\nltk_data'\n    - 'D:\\\\nltk_data'\n    - 'E:\\\\nltk_data'\n**********************************************************************\n", "logger": "app.core.matching.semantic_matcher", "level": "warning", "timestamp": "2025-04-19T13:53:39.760266Z"}
+Failed to parse job: 
+**********************************************************************
+  Resource [93mpunkt_tab[0m not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  [31m>>> import nltk
+  >>> nltk.download('punkt_tab')
+  [0m
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load [93mtokenizers/punkt_tab/english/[0m
+
+  Searched in:
+    - 'C:\\Users\\Prasanth/nltk_data'
+    - 'D:\\advance_code\\venv\\nltk_data'
+    - 'D:\\advance_code\\venv\\share\\nltk_data'
+    - 'D:\\advance_code\\venv\\lib\\nltk_data'
+    - 'C:\\Users\\Prasanth\\AppData\\Roaming\\nltk_data'
+    - 'C:\\nltk_data'
+    - 'D:\\nltk_data'
+    - 'E:\\nltk_data'
+**********************************************************************
+
+{"event": "Skipping invalid job: Job parsing failed: \n**********************************************************************\n  Resource \u001b[93mpunkt_tab\u001b[0m not found.\n  Please use the NLTK Downloader to obtain the resource:\n\n  \u001b[31m>>> import nltk\n  >>> nltk.download('punkt_tab')\n  \u001b[0m\n  For more information see: https://www.nltk.org/data.html\n\n  Attempted to load \u001b[93mtokenizers/punkt_tab/english/\u001b[0m\n\n  Searched in:\n    - 'C:\\\\Users\\\\Prasanth/nltk_data'\n    - 'D:\\\\advance_code\\\\venv\\\\nltk_data'\n    - 'D:\\\\advance_code\\\\venv\\\\share\\\\nltk_data'\n    - 'D:\\\\advance_code\\\\venv\\\\lib\\\\nltk_data'\n    - 'C:\\\\Users\\\\Prasanth\\\\AppData\\\\Roaming\\\\nltk_data'\n    - 'C:\\\\nltk_data'\n    - 'D:\\\\nltk_data'\n    - 'E:\\\\nltk_data'\n**********************************************************************\n", "logger": "app.core.matching.semantic_matcher", "level": "warning", "timestamp": "2025-04-19T13:53:40.159052Z"}
+Failed to parse job: 
+**********************************************************************
+  Resource [93mpunkt_tab[0m not found.
+  Please use the NLTK Downloader to obtain the resource:
+
+  [31m>>> import nltk
+  >>> nltk.download('punkt_tab')
+  [0m
+  For more information see: https://www.nltk.org/data.html
+
+  Attempted to load [93mtokenizers/punkt_tab/english/[0m
+
+  Searched in:
+    - 'C:\\Users\\Prasanth/nltk_data'
+    - 'D:\\advance_code\\venv\\nltk_data'
+    - 'D:\\advance_code\\venv\\share\\nltk_data'
+    - 'D:\\advance_code\\venv\\lib\\nltk_data'
+    - 'C:\\Users\\Prasanth\\AppData\\Roaming\\nltk_data'
+    - 'C:\\nltk_data'
+    - 'D:\\nltk_data'
+    - 'E:\\nltk_data'
+**********************************************************************
+
+{"event": "Skipping invalid job: Job parsing failed: \n**********************************************************************\n  Resource \u001b[93mpunkt_tab\u001b[0m not found.\n  Please use the NLTK Downloader to obtain the resource:\n\n  \u001b[31m>>> import nltk\n  >>> nltk.download('punkt_tab')\n  \u001b[0m\n  For more information see: https://www.nltk.org/data.html\n\n  Attempted to load \u001b[93mtokenizers/punkt_tab/english/\u001b[0m\n\n  Searched in:\n    - 'C:\\\\Users\\\\Prasanth/nltk_data'\n    - 'D:\\\\advance_code\\\\venv\\\\nltk_data'\n    - 'D:\\\\advance_code\\\\venv\\\\share\\\\nltk_data'\n    - 'D:\\\\advance_code\\\\venv\\\\lib\\\\nltk_data'\n    - 'C:\\\\Users\\\\Prasanth\\\\AppData\\\\Roaming\\\\nltk_data'\n    - 'C:\\\\nltk_data'\n    - 'D:\\\\nltk_data'\n    - 'E:\\\\nltk_data'\n**********************************************************************\n", "logger": "app.core.matching.semantic_matcher", "level": "warning", "timestamp": "2025-04-19T13:53:40.656651Z"}
+PyTorch version 2.6.0 available.
+Load pretrained SentenceTransformer: paraphrase-MiniLM-L6-v2
+Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+Successfully loaded all NLP models
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T14:01:48.712812Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T14:01:57.675934Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+{"event": "Extracted skills using fallback method: {'education', 'cd', 'jenkins', 'authentication', 'integration', 'gcp', 'architecture', 'postgresql', 'api', 'framework', 'optimization', 'inventory management', 'pipelines', 'system', 'aws', 'service', 'jwt', 'spring boot', 'information technology', 'programming languages', 'user management', 'reliability', 'linkedin', 'rest', 'https', 'tests', 'mongodb', 'data management', 'django', 'cloud services', 'logging', 'mysql', 'sql', 'java', 'security', 'git', 'fintech', 'redis', 'software', 'programming', 'ci', 'javascript', 'python', 'github'}", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T14:01:59.362447Z"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1133 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1132 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1130 "HTTP/1.1 200 OK"
+Load pretrained SentenceTransformer: paraphrase-MiniLM-L6-v2
+Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+Successfully loaded all NLP models
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T14:02:46.579505Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T14:02:56.581678Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+{"event": "Extracted skills using fallback method: {'education', 'cd', 'jenkins', 'authentication', 'integration', 'gcp', 'architecture', 'postgresql', 'api', 'framework', 'optimization', 'inventory management', 'pipelines', 'system', 'aws', 'service', 'jwt', 'spring boot', 'information technology', 'programming languages', 'user management', 'reliability', 'linkedin', 'rest', 'https', 'tests', 'mongodb', 'data management', 'django', 'cloud services', 'logging', 'mysql', 'sql', 'java', 'security', 'git', 'fintech', 'redis', 'software', 'programming', 'ci', 'javascript', 'python', 'github'}", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T14:02:57.438916Z"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1133 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1132 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1130 "HTTP/1.1 200 OK"
+PyTorch version 2.6.0 available.
+Load pretrained SentenceTransformer: paraphrase-MiniLM-L6-v2
+Successfully loaded all NLP models
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T14:17:35.488231Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T14:17:45.448091Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+{"event": "Extracted skills using fallback method: {'api', 'jenkins', 'information technology', 'logging', 'java', 'linkedin', 'architecture', 'framework', 'user management', 'https', 'fintech', 'postgresql', 'security', 'software', 'system', 'service', 'git', 'aws', 'python', 'pipelines', 'cloud services', 'programming languages', 'jwt', 'redis', 'optimization', 'cd', 'mysql', 'inventory management', 'gcp', 'education', 'programming', 'authentication', 'integration', 'data management', 'spring boot', 'sql', 'ci', 'django', 'github', 'reliability', 'javascript', 'tests', 'mongodb', 'rest'}", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T14:17:46.328145Z"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1133 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1132 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1130 "HTTP/1.1 200 OK"
+PyTorch version 2.6.0 available.
+Load pretrained SentenceTransformer: paraphrase-MiniLM-L6-v2
+Load pretrained SentenceTransformer: sentence-transformers/all-MiniLM-L6-v2
+Successfully loaded all NLP models
+{"event": "Loading semantic models...", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T14:19:42.598438Z"}
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: all-mpnet-base-v2
+Use pytorch device_name: cpu
+Load pretrained SentenceTransformer: msmarco-distilbert-base-v4
+{"event": "All models loaded successfully", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T14:19:52.020236Z"}
+HTTP Request: POST http://localhost:8000/api/v1/auth/validate-token "HTTP/1.1 200 OK"
+{"event": "Extracted skills using fallback method: {'javascript', 'postgresql', 'python', 'information technology', 'data management', 'logging', 'sql', 'reliability', 'django', 'rest', 'user management', 'jwt', 'security', 'linkedin', 'aws', 'framework', 'software', 'gcp', 'java', 'fintech', 'git', 'cd', 'redis', 'service', 'spring boot', 'https', 'authentication', 'education', 'github', 'system', 'programming languages', 'jenkins', 'mysql', 'cloud services', 'pipelines', 'inventory management', 'mongodb', 'architecture', 'programming', 'optimization', 'ci', 'tests', 'integration', 'api'}", "logger": "app.core.matching.semantic_matcher", "level": "info", "timestamp": "2025-04-19T14:19:52.966001Z"}
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1133 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1132 "HTTP/1.1 200 OK"
+HTTP Request: GET http://localhost:8000/api/v1/jobs/match/1130 "HTTP/1.1 200 OK"
