@@ -84,6 +84,20 @@ async def get_match_history(
     )
 
 
+def safe_str(val):
+    if val is None:
+        return ""
+    # Convert known non-str types to str
+    if not isinstance(val, str):
+        return str(val)
+    return val
+
+
+def sanitize_sequence(seq):
+    """Ensure all elements in seq are strings, return cleaned list."""
+    return [str(x) for x in (seq or []) if x is not None and str(x).strip() != ""]
+
+
 @router.post(
     "/new-matchs",
     response_model=List[JobMatchResult],  # Updated response model
@@ -160,6 +174,7 @@ async def new_match(
 
         # Process jobs with proper field mapping
         jobs = await JobService.fetch_jobs(job_ids_list, current_user["token"])
+        logger.info(f"Fetched {len(jobs)} jobs for matching.")
         processed_jobs = []
 
         for job in jobs:
@@ -167,29 +182,74 @@ async def new_match(
 
             # Map fields to match expected structure
             processed_job = {
-                "job_title": job_dict.get("job_title", ""),
-                "company_name": job_dict.get("company_name", ""),
-                "location": job_dict.get("location", ""),
-                "job_type": job_dict.get("job_type", ""),
-                "apply_link": str(job_dict.get("apply_link", "")),
-                "skills": job_dict.get("skills", []),
-                "description": job_dict.get("description", ""),
+                "job_title": safe_str(job_dict.get("job_title", "")),
+                "company_name": safe_str(job_dict.get("company_name", "")),
+                "location": safe_str(job_dict.get("location", "")),
+                "job_type": safe_str(job_dict.get("job_type", "")),
+                "apply_link": safe_str(job_dict.get("apply_link", "")),
+                "skills": sanitize_sequence(job_dict.get("skills", [])),
+                "requirements": sanitize_sequence(job_dict.get("requirements", [])),
+                "responsibilities": sanitize_sequence(
+                    job_dict.get("responsibilities", [])
+                ),
+                "benefits": sanitize_sequence(job_dict.get("benefits", [])),
+                "qualifications": sanitize_sequence(job_dict.get("qualifications", [])),
+                "description": safe_str(job_dict.get("description", "")),
             }
 
             # Add normalized_features with all required fields
             processed_job["normalized_features"] = {
-                "job_type": processed_job["job_type"],
-                "location": processed_job["location"],
-                "salary": job_dict.get("salary", ""),
-                "company_name": processed_job["company_name"],
-                "skills": processed_job["skills"],
-                "title": processed_job["job_title"],
+                "job_type": safe_str(processed_job["job_type"]),
+                "location": safe_str(processed_job["location"]),
+                "salary": safe_str(job_dict.get("salary", "")),
+                "company_name": safe_str(processed_job["company_name"]),
+                "skills": sanitize_sequence(processed_job.get("skills", [])),
+                "title": safe_str(processed_job["job_title"]),
             }
 
             processed_jobs.append(processed_job)
 
+        for job in processed_jobs:
+            for k in (
+                "skills",
+                "requirements",
+                "responsibilities",
+                "benefits",
+                "qualifications",
+            ):
+                # ensure it's a list
+                val = job.get(k, [])
+                if not isinstance(val, list):
+                    val = [val]
+                job[k] = [
+                    str(x).strip()
+                    for x in val
+                    if x is not None and str(x).strip() != ""
+                ]
+            if "normalized_features" in job:
+                val = job["normalized_features"].get("skills", [])
+                if not isinstance(val, list):
+                    val = [val]
+                job["normalized_features"]["skills"] = [
+                    str(x).strip()
+                    for x in val
+                    if x is not None and str(x).strip() != ""
+                ]
+            # Extra: guarantee presence
+            for lfield in [
+                "skills",
+                "requirements",
+                "responsibilities",
+                "benefits",
+                "qualifications",
+            ]:
+                if lfield not in job or not isinstance(job[lfield], list):
+                    job[lfield] = []
+
         # Perform matching with proper parameter structure
+
         processed_jobs = job_processor.process_job_batch(processed_jobs)
+
         results = matching_service.match_resume_to_jobs(
             vars(resume_data), processed_jobs, top_n=5  # Convert to dict
         )

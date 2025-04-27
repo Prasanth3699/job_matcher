@@ -62,5 +62,5 @@ def get_settings() -> Settings:
 
 settings = get_settings()
 
-if settings.DEBUG:
-    print(settings.model_dump())  # Print settings only in debug mode
+# if settings.DEBUG:
+#     print(settings.model_dump())  # Print settings only in debug mode

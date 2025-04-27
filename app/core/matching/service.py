@@ -35,6 +35,7 @@ class MatchingService:
         Returns:
             List of match results with scores and explanations
         """
+
         try:
             results = self.scorer.match_resume_to_jobs(resume_data, jobs_data, top_n)
             return [self._format_result(result) for result in results]
