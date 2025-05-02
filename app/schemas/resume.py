@@ -4,6 +4,7 @@ from typing import List, Dict, Any, Optional
 
 
 class Job(BaseModel):
+    id: int
     job_title: str
     company_name: Optional[str] = None
     job_type: Optional[str] = None
