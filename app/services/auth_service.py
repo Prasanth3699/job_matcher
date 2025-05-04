@@ -2,9 +2,7 @@ import httpx
 from fastapi import HTTPException, status
 from jose import jwt, JWTError
 from app.core.config import get_settings
-import logging
-
-logger = logging.getLogger(__name__)
+from app.utils.logger import logger
 
 settings = get_settings()
 
