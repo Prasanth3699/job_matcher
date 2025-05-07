@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     # API Settings
     API_V1_STR: str = "/api/v1"
     PROJECT_NAME: str = "Resume Jobs API"
+    ALLOWED_ORIGINS: List[str] = []
 
     # Auth Settings
     SECRET_KEY: str = (

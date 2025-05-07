@@ -100,12 +100,6 @@ for mw in middlewares:
     logger.info(f"Adding middleware: {mw['description']}")
     mw["func"](app)
 
-# # Include routers (prefixes already include /v1)
-# app.include_router(matching_router)
-# app.include_router(learning_router)
-# app.include_router(analytics_router)
-# app.include_router(core_router)
-
 
 # Exception handler remains the same
 @app.exception_handler(Exception)
