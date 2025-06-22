@@ -1,3 +1,4 @@
+# middleware/subscription_middleware.py
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 import jwt
