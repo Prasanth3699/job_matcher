@@ -1,7 +1,7 @@
 # resume_matcher/core/document_processing/sanitizer.py
 import re
 import html
-from typing import Optional
+from typing import Any, Optional
 import logging
 from pathlib import Path
 
@@ -50,20 +50,22 @@ class ContentSanitizer:
         allowed_extensions = {".pdf", ".doc", ".docx", ".txt"}
         return file_path.suffix.lower() in allowed_extensions
 
-    def sanitize_text(self, text: str) -> str:
-        """Sanitize extracted text content"""
-        if not text:
+    def sanitize_text(self, text: Any) -> str:
+        """
+        Sanitize extracted text content.
+        Will accept int, None, etc., by first coercing to str.
+        """
+        # 1) None → empty
+        if text is None:
+            return ""
+        # 2) Force any value into a Python string
+        text_str = str(text)
+        if not text_str:
             return ""
 
-        # Remove potentially malicious content
-        sanitized = text
+        # 3) Now run your existing sanitizer logic
         for pattern in self.malicious_patterns:
-            sanitized = pattern.sub("", sanitized)
-
-        # HTML escape to prevent XSS
-        sanitized = html.escape(sanitized)
-
-        # Remove non-printable characters except newlines and tabs
-        sanitized = re.sub(r"[^\x20-\x7E\r\n\t]", "", sanitized)
-
-        return sanitized.strip()
+            text_str = pattern.sub("", text_str)
+        text_str = html.escape(text_str)
+        text_str = re.sub(r"[^\x20-\x7E\r\n\t]", "", text_str)
+        return text_str.strip()

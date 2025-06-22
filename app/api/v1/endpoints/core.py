@@ -1,10 +1,11 @@
 from datetime import datetime, timezone
 from pydantic import BaseModel
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, Request
 from fastapi.responses import Response
 import prometheus_client
 from prometheus_fastapi_instrumentator import Instrumentator
 from prometheus_client import REGISTRY
+from ....middleware.subscription_middleware import verify_subscription
 
 # Create a router for core endpoints
 router = APIRouter(
@@ -19,9 +20,16 @@ class HealthResponse(BaseModel):
     timestamp: str
 
 
-@router.get("/health", response_model=HealthResponse)
-async def health_check():
+@router.get(
+    "/health",
+    response_model=HealthResponse,
+    dependencies=[Depends(verify_subscription)],
+)
+async def health_check(request: Request):
     """Health check endpoint for API monitoring"""
+
+    user = request.state.user
+    subscription = request.state.subscription
     return {
         "status": "healthy",
         "version": "1.0.0",

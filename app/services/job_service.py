@@ -2,13 +2,12 @@ import httpx
 from typing import List
 import re
 from bs4 import BeautifulSoup
-import logging
 
 from ..core.config import get_settings
 from ..schemas.resume import Job
 
 settings = get_settings()
-logger = logging.getLogger(__name__)
+from app.utils.logger import logger
 
 
 class JobService:
@@ -65,7 +64,6 @@ class JobService:
                     logger.error(f"Timeout fetching job {job_id}")
                 except Exception as e:
                     logger.error(f"Exception fetching job {job_id}: {str(e)}")
-
         return jobs
 
     @staticmethod

@@ -1,10 +1,11 @@
-# resume_matcher/core/matching/semantic_matcher.py
+# /core/matching/semantic_matcher.py
 from typing import List, Dict, Optional, Tuple
 import numpy as np
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 from ...utils.logger import logger
 from .models import MatchingConstants
+from ..utils import safe_lower
 
 
 class SemanticMatcher:
@@ -276,90 +277,9 @@ class SemanticMatcher:
             logger.error(f"Skill matching failed: {str(e)}")
             return 0.0, [], job_skills
 
-    # def match_skills(
-    #     self, resume_skills: List[str], job_skills: List[str]
-    # ) -> Tuple[float, List[str], List[str]]:
-    #     """
-    #     Match skills between resume and job using semantic similarity.
-
-    #     Args:
-    #         resume_skills: List of skills from resume
-    #         job_skills: List of skills required by job
-
-    #     Returns:
-    #         Tuple of (match_score, matching_skills, missing_skills)
-    #     """
-    #     # Normalize all skills first
-    #     job_skills = [self._normalize_skill(s) for s in job_skills]
-    #     resume_skills = [self._normalize_skill(s) for s in resume_skills]
-
-    #     # Remove duplicates after normalization
-    #     job_skills = list(set(job_skills))
-    #     resume_skills = list(set(resume_skills))
-
-    #     # Remove empty and invalid skills
-    #     job_skills = [s for s in job_skills if s and len(s.split()) <= 3]
-    #     resume_skills = [s for s in resume_skills if s and len(s.split()) <= 3]
-
-    #     if not job_skills:
-    #         return 1.0, [], []  # No skills required = perfect match
-
-    #     if not resume_skills:
-    #         return 0.0, [], job_skills  # No skills provided = no match
-
-    #     # Get embeddings for all skills
-    #     try:
-    #         all_skills = list(set(resume_skills + job_skills))
-    #         skill_embeddings = self.get_embeddings(all_skills)
-    #         skill_to_embedding = {
-    #             skill: emb for skill, emb in zip(all_skills, skill_embeddings)
-    #         }
-
-    #         # Calculate similarity matrix
-    #         job_skill_embeddings = np.array(
-    #             [skill_to_embedding[skill] for skill in job_skills]
-    #         )
-    #         resume_skill_embeddings = np.array(
-    #             [skill_to_embedding[skill] for skill in resume_skills]
-    #         )
-
-    #         similarity_matrix = cosine_similarity(
-    #             job_skill_embeddings, resume_skill_embeddings
-    #         )
-
-    #         # Find best matches
-    #         matching_skills = []
-    #         missing_skills = []
-
-    #         for i, job_skill in enumerate(job_skills):
-    #             best_match_idx = np.argmax(similarity_matrix[i])
-    #             best_match_score = similarity_matrix[i][best_match_idx]
-
-    #             if best_match_score >= self.constants.SKILL_MATCH_THRESHOLD:
-    #                 matching_skills.append(
-    #                     (job_skill, resume_skills[best_match_idx], best_match_score)
-    #                 )
-    #             else:
-    #                 missing_skills.append(job_skill)
-
-    #         # Calculate overall score
-    #         if len(job_skills) > 0:
-    #             match_score = len(matching_skills) / len(job_skills)
-    #         else:
-    #             match_score = 0.0
-
-    #         # Filter out any sentence-like missing skills
-    #         missing_skills = [s for s in missing_skills if len(s.split()) <= 3]
-
-    #         return match_score, matching_skills, missing_skills
-
-    #     except Exception as e:
-    #         logger.error(f"Skill matching failed: {str(e)}")
-    #         return 0.0, [], job_skills
-
     def _normalize_skill(self, skill: str) -> str:
         """Normalize skill names using the mapping"""
-        skill = skill.lower().strip()
+        skill = safe_lower(skill)
 
         # Check if this is a variant of a known skill
         for canonical, variants in self.constants.SKILL_NORMALIZATIONS.items():
@@ -370,7 +290,7 @@ class SemanticMatcher:
 
     def _clean_skill(self, skill: str) -> str:
         """Normalize skill formatting"""
-        skill = skill.lower().strip(".,!?(){}[]")
+        skill = safe_lower(skill).strip(".,!?(){}[]")
         # Remove common prefixes
         for prefix in ["knowledge of", "experience with", "proficient in"]:
             if skill.startswith(prefix):

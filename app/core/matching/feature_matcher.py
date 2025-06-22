@@ -1,7 +1,10 @@
 # resume_matcher/core/matching/feature_matcher.py
+import re
 from typing import Dict, Any, List, Optional, Tuple
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
+
+from ..utils import safe_lower
 from ...utils.logger import logger
 from .models import MatchingConstants
 
@@ -82,9 +85,56 @@ class FeatureMatcher:
 
         return scores
 
+    def _parse_experience(self, exp) -> float:
+        """
+        Parse various experience formats into a float number of years.
+        Handles int, float, and string representations robustly.
+        Returns 0.0 if parsing fails.
+        """
+        if exp is None:
+            return 0.0
+        # If already a float/int, return as float (nonnegative)
+        if isinstance(exp, (int, float)):
+            return max(0.0, float(exp))
+
+        # Convert to string and lowercase for processing
+        exp_str = str(exp).strip().lower()
+
+        # Match patterns like "3 years", "2 yrs", "at least 5", "5+", "7-10 years"
+        # 1. Range, e.g. "7-10 years"
+        match = re.match(r"(\d+(?:\.\d+)?)\s*[-to]+\s*(\d+(?:\.\d+)?)", exp_str)
+        if match:
+            low = float(match.group(1))
+            high = float(match.group(2))
+            return (low + high) / 2.0
+
+        # 2. Plus at the end (e.g. "3+", "5+ years")
+        match = re.match(r"(\d+(?:\.\d+)?)\s*\+\s*(?:years?|yrs?)?", exp_str)
+        if match:
+            return float(match.group(1))
+
+        # 3. Minimum/at least/similar phrases
+        match = re.match(r"(?:minimum|min|at least)\s*(\d+(?:\.\d+)?)", exp_str)
+        if match:
+            return float(match.group(1))
+
+        # 4. Simple number (e.g. "5", "5 years", "5yrs", "5.5 yr")
+        match = re.match(r"(\d+(?:\.\d+)?)\s*(?:years?|yrs?|yr)?", exp_str)
+        if match:
+            return float(match.group(1))
+
+        # 5. Special/fallback cases for 'no experience', 'entry', 'junior', etc.
+        if any(
+            word in exp_str for word in ["entry", "junior", "fresher", "no experience"]
+        ):
+            return 0.0
+
+        # If all else fails
+        return 0.0
+
     def _match_experience(self, resume_exp: str, job_exp: str) -> float:
         """More nuanced experience matching"""
-        if not job_exp or "0 years" in job_exp.lower():
+        if not job_exp or "0 years" in safe_lower(job_exp):
             return 1.0
 
         try:
@@ -107,11 +157,11 @@ class FeatureMatcher:
         if not resume_title or not job_title:
             return 0.5
 
-        resume_words = set(resume_title.lower().split())
-        job_words = set(job_title.lower().split())
+        resume_words = set(safe_lower(resume_title).split())
+        job_words = set(safe_lower(job_title).split())
 
         # Exact match
-        if resume_title.lower() == job_title.lower():
+        if safe_lower(resume_title) == safe_lower(job_title):
             return 1.0
 
         # Partial match
@@ -201,7 +251,7 @@ class FeatureMatcher:
         if not text:
             return 0.0
 
-        text_words = set(text.lower().split())
+        text_words = set(safe_lower(text).split())
         keyword_set = set(keywords)
         intersection = text_words.intersection(keyword_set)
 

@@ -1,4 +1,3 @@
-# resume_matcher/core/matching/hybrid_scorer.py
 from typing import List, Dict, Any
 from dataclasses import asdict
 
@@ -7,6 +6,14 @@ from ...utils.logger import logger
 from .models import MatchResult, MatchingConstants
 from .semantic_matcher import SemanticMatcher
 from .feature_matcher import FeatureMatcher
+
+
+def coerce_list_of_str(seq):
+    if seq is None:
+        return []
+    if isinstance(seq, str):
+        return [seq.strip()]
+    return [str(x).strip() for x in seq if x is not None and str(x).strip() != ""]
 
 
 class HybridScorer:
@@ -37,6 +44,8 @@ class HybridScorer:
 
         for job in jobs_data:
             try:
+                resume_skills = coerce_list_of_str(resume_data.get("skills", []))
+                job_skills = coerce_list_of_str(job.get("skills", []))
                 # Get job description for context-aware matching
                 job_context = job.get("description", "")[
                     :1000
@@ -45,8 +54,8 @@ class HybridScorer:
                 # Enhanced skill matching with context
                 skill_score, matching_skills, missing_skills = (
                     self.semantic_matcher.enhanced_skill_match(
-                        resume_data.get("skills", []),
-                        job.get("skills", []),
+                        resume_skills,
+                        job_skills,
                         context=job_context,
                     )
                 )
@@ -198,18 +207,6 @@ class HybridScorer:
 
         # Ensure we return a native Python float
         return float(np.clip(scaled_score, 0, 1))
-
-    # def _calculate_weighted_score(self, feature_scores: Dict[str, float]) -> float:
-    #     """Calculate weighted overall score from feature scores"""
-    #     total_weight = 0.0
-    #     weighted_sum = 0.0
-
-    #     for feature, weight in self.constants.FEATURE_WEIGHTS.items():
-    #         if feature in feature_scores:
-    #             weighted_sum += feature_scores[feature] * weight
-    #             total_weight += weight
-
-    #     return weighted_sum / total_weight if total_weight > 0 else 0.0
 
     def _generate_explanation(
         self,
