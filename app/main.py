@@ -10,7 +10,7 @@ from app.db.base import Base
 from app.core.config import get_settings
 from app.api.router import api_router
 from app.api.v1.endpoints.core import setup_instrumentation
-from app.middleware.subscription_middleware import verify_subscription
+
 
 settings = get_settings()
 
@@ -22,8 +22,21 @@ settings = get_settings()
 async def lifespan(app: FastAPI):
     # ------------- startup -------------------------------------------
     Base.metadata.create_all(bind=engine)
+    
+    # Initialize services
+    from app.services.rabbitmq_client import get_rabbitmq_client
+    try:
+        # Pre-initialize RabbitMQ client to test connection
+        await get_rabbitmq_client()
+        print("RabbitMQ client initialized successfully")
+    except Exception as e:
+        print(f"Warning: RabbitMQ client initialization failed: {e}")
+    
     yield  # <--- application runs here
+    
     # ------------- shutdown ------------------------------------------
+    from app.services.rabbitmq_client import cleanup_rabbitmq_client
+    await cleanup_rabbitmq_client()
     engine.dispose()
 
 
@@ -40,11 +53,14 @@ app = FastAPI(
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=settings.CORS_ORIGINS,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
+
+# Middleware
+# app.add_middleware(MLSubscriptionMiddleware)
 
 # Routers
 app.include_router(api_router, prefix=settings.API_V1_STR)
@@ -54,31 +70,3 @@ setup_instrumentation(app)
 
 
 app.middleware("http")
-
-
-async def subscription_middleware(request: Request, call_next):
-    # Only apply to matching endpoints
-    if request.url.path.startswith("/api/v1/matching/new-matchs"):
-        # Get the authorization header
-        auth_header = request.headers.get("Authorization")
-        if not auth_header:
-            return JSONResponse(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                content={"detail": "Authentication required"},
-            )
-
-        # Extract token
-        token = auth_header.replace("Bearer ", "")
-
-        try:
-            # Use the verify_subscription logic
-            credentials = HTTPAuthorizationCredentials(
-                scheme="Bearer", credentials=token
-            )
-            await verify_subscription(request, credentials)
-        except HTTPException as e:
-            return JSONResponse(status_code=e.status_code, content={"detail": e.detail})
-
-    # Continue with the request
-    response = await call_next(request)
-    return response

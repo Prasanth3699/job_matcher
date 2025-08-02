@@ -5,6 +5,7 @@ import spacy
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 from .models import JobPosting
+from ...utils.logger import logger as app_logger
 
 logger = logging.getLogger(__name__)
 
@@ -107,31 +108,62 @@ class JobAnalyzer:
         elif experience.get("type") == "senior":
             return 2
         elif "min" in experience:
-            return min(experience["min"] // 3, 4)  # Scale to 0-4
+            try:
+                min_exp = experience["min"]
+                # Convert to int if it's a string
+                if isinstance(min_exp, str):
+                    min_exp = int(float(min_exp))  # Handle "5.0" string case
+                elif isinstance(min_exp, float):
+                    min_exp = int(min_exp)
+                
+                if isinstance(min_exp, int):
+                    return min(min_exp // 3, 4)  # Scale to 0-4
+                else:
+                    app_logger.warning(f"Invalid experience min value: {min_exp}, using default")
+                    return 1
+            except (ValueError, TypeError) as e:
+                app_logger.warning(f"Error converting experience min to int: {experience['min']}, error: {e}")
+                return 1
         return 1  # Default to mid-level
 
     def _get_salary_level(self, salary: Dict[str, Any]) -> int:
         """Convert salary to numerical level"""
-        min_salary = salary["min"]
+        try:
+            min_salary = salary["min"]
+            
+            # Convert to numeric if it's a string
+            if isinstance(min_salary, str):
+                # Remove commas and other non-numeric characters except dots
+                min_salary = min_salary.replace(",", "").replace("$", "").strip()
+                min_salary = float(min_salary)
+            elif isinstance(min_salary, int):
+                min_salary = float(min_salary)
+            elif not isinstance(min_salary, (int, float)):
+                app_logger.warning(f"Invalid salary min value: {min_salary}, using default")
+                return 1
 
-        # Normalize to USD if needed
-        if salary.get("currency") == "INR":
-            min_salary = min_salary / 80  # Approximate conversion
+            # Normalize to USD if needed
+            if salary.get("currency") == "INR":
+                min_salary = min_salary / 80  # Approximate conversion
 
-        if salary.get("period") == "month":
-            min_salary *= 12
-        elif salary.get("period") == "hour":
-            min_salary *= 2080  # Approximate hours in a work year
+            if salary.get("period") == "month":
+                min_salary *= 12
+            elif salary.get("period") == "hour":
+                min_salary *= 2080  # Approximate hours in a work year
 
-        # Scale to 0-5
-        if min_salary < 30000:
-            return 0
-        elif min_salary < 60000:
-            return 1
-        elif min_salary < 90000:
-            return 2
-        elif min_salary < 120000:
-            return 3
-        elif min_salary < 150000:
-            return 4
-        return 5
+            # Scale to 0-5
+            if min_salary < 30000:
+                return 0
+            elif min_salary < 60000:
+                return 1
+            elif min_salary < 90000:
+                return 2
+            elif min_salary < 120000:
+                return 3
+            elif min_salary < 150000:
+                return 4
+            return 5
+            
+        except (ValueError, TypeError, KeyError) as e:
+            app_logger.warning(f"Error converting salary to level: {salary}, error: {e}")
+            return 1  # Default level

@@ -311,7 +311,9 @@ class JobParser:
             similarities = np.dot(job_type_embeddings, input_embedding.T).flatten()
             best_match_idx = np.argmax(similarities)
 
-            if similarities[best_match_idx] > 0.7:  # Threshold for confidence
+            # Ensure similarity score is numeric before comparison
+            similarity_score = float(similarities[best_match_idx]) if len(similarities) > best_match_idx else 0.0
+            if similarity_score > 0.7:  # Threshold for confidence
                 return job_types[best_match_idx]
 
         return "other"
@@ -349,8 +351,10 @@ class JobParser:
                 try:
                     min_float = convert_to_float(min_val)
                     max_float = convert_to_float(max_val)
-                    # Ensure min is not greater than max
-                    if min_float and max_float and min_float > max_float:
+                    
+                    # Ensure both are numbers before comparison
+                    if (isinstance(min_float, (int, float)) and isinstance(max_float, (int, float)) 
+                        and min_float > max_float):
                         min_float, max_float = max_float, min_float
                     return min_float, max_float
                 except (ValueError, TypeError):
@@ -360,18 +364,21 @@ class JobParser:
                 min_val: float, max_val: float, multiplier: float = 1.0
             ) -> Dict[str, Any]:
                 try:
-                    min_salary = int(float(min_val) * multiplier)
-                    max_salary = int(float(max_val) * multiplier)
+                    # Convert to float first, then multiply, then convert to int
+                    min_float = float(min_val) if min_val is not None else 0.0
+                    max_float = float(max_val) if max_val is not None else 0.0
+                    
+                    min_salary = int(min_float * multiplier)
+                    max_salary = int(max_float * multiplier)
 
                     # Ensure values are numeric before comparison
                     min_value = float(min_salary)
                     max_value = float(max_salary)
 
                     # Validate reasonable salary range (1000 to 100M INR)
-                    if (
-                        1000 <= min_value <= 100000000
-                        and 1000 <= max_value <= 100000000
-                    ):
+                    # Ensure all values are numbers before comparison
+                    if (isinstance(min_value, (int, float)) and isinstance(max_value, (int, float)) and
+                        1000 <= min_value <= 100000000 and 1000 <= max_value <= 100000000):
                         return {
                             "min": min_salary,
                             "max": max_salary,
@@ -379,7 +386,8 @@ class JobParser:
                             "period": "year",
                         }
                     return None
-                except (ValueError, TypeError):
+                except (ValueError, TypeError) as e:
+                    logger.warning(f"Error creating salary dict: {e}, min_val: {min_val}, max_val: {max_val}")
                     return None
 
             # Handle direct dictionary input
@@ -782,7 +790,9 @@ class JobParser:
                 best_category = category_names[best_category_idx]
 
                 # Only use similarity if above threshold
-                if similarities[best_category_idx] > 0.65:
+                # Ensure similarity score is numeric before comparison
+                similarity_score = float(similarities[best_category_idx]) if len(similarities) > best_category_idx else 0.0
+                if similarity_score > 0.65:
                     section_name_lower = best_category
 
             # Extract content based on section type
