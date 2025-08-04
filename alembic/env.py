@@ -8,7 +8,13 @@ from app.core.config import settings
 
 from app.db.base import Base
 from app.models.match_history import MatchHistory
-
+from app.models.match_job import MatchJob
+from app.models.backup_log import BackupLog
+from app.models.job_posting import JobPosting
+from app.models.resume import Resume
+from app.models.user import User
+from app.models.feedback import Feedback
+from app.models.model_version import ModelVersion
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

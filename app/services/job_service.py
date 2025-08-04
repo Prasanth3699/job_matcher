@@ -7,7 +7,6 @@ import asyncio
 import json
 from typing import List, Dict, Any
 import re
-from decimal import Decimal
 from bs4 import BeautifulSoup
 import httpx
 import aio_pika
@@ -15,6 +14,14 @@ from aio_pika import connect, Message, DeliveryMode, ExchangeType
 from contextlib import asynccontextmanager
 
 from app.services.rabbitmq_client import rabbitmq_client_context
+from app.utils.serialization import make_json_serializable
+from app.core.constants import (
+    TimeoutSettings,
+    ProcessingLimits,
+    BusinessRules,
+    ErrorCodes,
+    ErrorMessages,
+)
 
 from ..core.config import get_settings
 from ..schemas.resume import Job
@@ -25,34 +32,6 @@ from app.core.events import (
     JobDataRequestBuilder,
     RoutingKeyGenerator,
 )
-
-
-def make_job_data_serializable(obj: Any) -> Any:
-    """Convert job data to JSON-serializable format."""
-    if obj is None:
-        return None
-    elif (
-        hasattr(obj, "__str__")
-        and hasattr(obj, "__class__")
-        and "HttpUrl" in str(obj.__class__)
-    ):
-        return str(obj)
-    elif isinstance(obj, Decimal):
-        return float(obj)
-    elif isinstance(obj, dict):
-        return {key: make_job_data_serializable(value) for key, value in obj.items()}
-    elif isinstance(obj, (list, tuple, set)):
-        return [make_job_data_serializable(item) for item in obj]
-    elif isinstance(obj, (str, int, float, bool)):
-        return obj
-    elif hasattr(obj, "isoformat"):
-        return obj.isoformat()
-    else:
-        try:
-            json.dumps(obj)
-            return obj
-        except (TypeError, ValueError):
-            return str(obj)
 
 
 settings = get_settings()
@@ -242,36 +221,22 @@ class JobService:
     @staticmethod
     async def fetch_jobs(job_ids: List[int], token: str = None) -> List[Job]:
         """
-        Fetch job details with RabbitMQ-first approach and HTTP fallback.
-
-        Args:
-            job_ids: List of job IDs to fetch
-            token: Optional authentication token for HTTP fallback
-
-        Returns:
-            List[Job]: List of job objects with cleaned data
-
-        Raises:
-            ValueError: If no job_ids provided
-            Exception: If all fetch methods fail
+        Fetch job details with RabbitMQ-first approach and HTTP fallback (async).
         """
         if not job_ids:
             logger.warning("No job IDs provided to fetch")
             return []
 
-        # Remove duplicates while preserving order
         unique_job_ids = list(dict.fromkeys(job_ids))
 
-        # Try RabbitMQ first
+        # Try RabbitMQ first (async)
         try:
             jobs_data = await JobService._fetch_jobs_rabbitmq(unique_job_ids)
 
-            # Process and clean job data
-            jobs = []
+            jobs: List[Job] = []
             for job_data in jobs_data:
                 try:
-                    # Make data serializable first to avoid type issues
-                    serializable_job_data = make_job_data_serializable(job_data)
+                    serializable_job_data = make_json_serializable(job_data)
                     cleaned_job = JobService._clean_job_data(serializable_job_data)
                     jobs.append(Job(**cleaned_job))
                 except Exception as e:
@@ -287,7 +252,7 @@ class JobService:
         except Exception as e:
             logger.error(f"RabbitMQ fetch failed: {str(e)}")
 
-        # Fallback to HTTP
+        # Fallback to HTTP (async)
         logger.info("Falling back to HTTP requests")
         try:
             jobs = await JobService._fetch_jobs_http_fallback(unique_job_ids, token)
@@ -297,7 +262,71 @@ class JobService:
         except Exception as e:
             logger.error(f"HTTP fallback failed: {str(e)}")
 
-        # If both methods fail
+        raise Exception(f"No job details found for IDs: {unique_job_ids}")
+
+    @staticmethod
+    def fetch_jobs_sync(job_ids: List[int], token: str = None) -> List[Job]:
+        """
+        Synchronous variant used by Celery worker threads on Windows.
+        RabbitMQ-first via a temporary event loop, with HTTP fallback using httpx.Client.
+        """
+        if not job_ids:
+            logger.warning("No job IDs provided to fetch (sync)")
+            return []
+
+        unique_job_ids = list(dict.fromkeys(job_ids))
+
+        # Try RabbitMQ first by driving the async client in a temporary loop
+        try:
+
+            def _run_async_rabbit(ids: List[int]) -> List[Dict[str, Any]]:
+                # Create a dedicated event loop for this blocking call
+                loop = asyncio.new_event_loop()
+                try:
+                    asyncio.set_event_loop(loop)
+                    return loop.run_until_complete(JobService._fetch_jobs_rabbitmq(ids))
+                finally:
+                    try:
+                        loop.run_until_complete(asyncio.sleep(0))
+                    except Exception:
+                        pass
+                    loop.close()
+
+            jobs_data = _run_async_rabbit(unique_job_ids)
+
+            jobs: List[Job] = []
+            for job_data in jobs_data:
+                try:
+                    serializable_job_data = make_json_serializable(job_data)
+                    cleaned_job = JobService._clean_job_data(serializable_job_data)
+                    jobs.append(Job(**cleaned_job))
+                except Exception as e:
+                    logger.error(f"Error processing job data (sync): {str(e)}")
+                    continue
+
+            if jobs:
+                logger.info(
+                    f"Successfully fetched {len(jobs)} jobs via RabbitMQ (sync)"
+                )
+                return jobs
+            else:
+                logger.warning("No valid jobs received from RabbitMQ (sync)")
+
+        except Exception as e:
+            logger.error(f"RabbitMQ fetch failed (sync): {str(e)}")
+
+        # HTTP fallback using synchronous client
+        logger.info("Falling back to HTTP requests (sync)")
+        try:
+            jobs = JobService._fetch_jobs_http_fallback_sync(unique_job_ids, token)
+            if jobs:
+                logger.info(
+                    f"Successfully fetched {len(jobs)} jobs via HTTP fallback (sync)"
+                )
+                return jobs
+        except Exception as e:
+            logger.error(f"HTTP fallback failed (sync): {str(e)}")
+
         raise Exception(f"No job details found for IDs: {unique_job_ids}")
 
     @staticmethod
@@ -326,7 +355,9 @@ class JobService:
             # Use bulk request for multiple jobs, individual for single job
             if len(job_ids) > 1:
                 logger.debug(f"Fetching {len(job_ids)} jobs via bulk RabbitMQ request")
-                response = await client.request_bulk_jobs(job_ids, timeout=45.0)
+                response = await client.request_bulk_jobs(
+                    job_ids, timeout=TimeoutSettings.RABBITMQ_BULK_REQUEST_TIMEOUT
+                )
 
                 if response.get("status") == "success":
                     bulk_data = response.get("bulk_data", {})
@@ -340,7 +371,9 @@ class JobService:
                     )
             else:
                 logger.debug(f"Fetching single job {job_ids[0]} via RabbitMQ")
-                response = await client.request_single_job(job_ids[0], timeout=30.0)
+                response = await client.request_single_job(
+                    job_ids[0], timeout=TimeoutSettings.RABBITMQ_REQUEST_TIMEOUT
+                )
 
                 if response.get("status") == "success":
                     job_data = response.get("job_data")
@@ -369,24 +402,19 @@ class JobService:
         job_ids: List[int], token: str = None
     ) -> List[Job]:
         """
-        Fallback HTTP method for fetching jobs when RabbitMQ fails.
-
-        Args:
-            job_ids: List of job IDs to fetch
-            token: Optional authentication token
-
-        Returns:
-            List[Job]: List of successfully fetched and processed jobs
+        Fallback HTTP method for fetching jobs when RabbitMQ fails (async).
         """
         if not settings.JOBS_SERVICE_URL:
             logger.error("JOBS_SERVICE_URL not configured for HTTP fallback")
             return []
 
-        jobs = []
+        jobs: List[Job] = []
         headers = {"Authorization": f"Bearer {token}"} if token else {}
 
-        # Configure HTTP client with retries and timeouts
-        timeout = httpx.Timeout(10.0, connect=5.0)
+        timeout = httpx.Timeout(
+            TimeoutSettings.HTTP_REQUEST_TIMEOUT,
+            connect=TimeoutSettings.HTTP_CONNECT_TIMEOUT,
+        )
 
         async with httpx.AsyncClient(
             base_url=settings.JOBS_SERVICE_URL,
@@ -394,16 +422,14 @@ class JobService:
             limits=httpx.Limits(max_connections=10, max_keepalive_connections=5),
         ) as client:
 
-            # Process jobs with semaphore to limit concurrent requests
-            semaphore = asyncio.Semaphore(5)  # Max 5 concurrent requests
+            semaphore = asyncio.Semaphore(ProcessingLimits.MAX_CONCURRENT_REQUESTS)
 
-            async def fetch_single_job(job_id: int) -> Job:
+            async def fetch_single_job(job_id: int) -> Job | None:
                 async with semaphore:
                     try:
                         response = await client.get(
                             f"/api/v1/jobs/match/{job_id}", headers=headers
                         )
-
                         if response.status_code == 200:
                             job_data = response.json()
                             cleaned_job = JobService._clean_job_data(job_data)
@@ -413,7 +439,6 @@ class JobService:
                                 f"HTTP error fetching job {job_id}: Status {response.status_code}"
                             )
                             return None
-
                     except httpx.TimeoutException:
                         logger.error(f"Timeout fetching job {job_id}")
                         return None
@@ -421,16 +446,59 @@ class JobService:
                         logger.error(f"Exception fetching job {job_id}: {str(e)}")
                         return None
 
-            # Execute all requests concurrently
             tasks = [fetch_single_job(job_id) for job_id in job_ids]
             results = await asyncio.gather(*tasks, return_exceptions=True)
 
-            # Filter successful results
             for result in results:
                 if isinstance(result, Job):
                     jobs.append(result)
                 elif isinstance(result, Exception):
                     logger.error(f"Task failed with exception: {str(result)}")
+
+        return jobs
+
+    @staticmethod
+    def _fetch_jobs_http_fallback_sync(
+        job_ids: List[int], token: str = None
+    ) -> List[Job]:
+        """
+        Fallback HTTP method for fetching jobs in synchronous context (Celery worker).
+        """
+        if not settings.JOBS_SERVICE_URL:
+            logger.error("JOBS_SERVICE_URL not configured for HTTP fallback (sync)")
+            return []
+
+        jobs: List[Job] = []
+        headers = {"Authorization": f"Bearer {token}"} if token else {}
+
+        timeout = httpx.Timeout(
+            TimeoutSettings.HTTP_REQUEST_TIMEOUT,
+            connect=TimeoutSettings.HTTP_CONNECT_TIMEOUT,
+        )
+
+        with httpx.Client(
+            base_url=settings.JOBS_SERVICE_URL,
+            timeout=timeout,
+            limits=httpx.Limits(max_connections=10, max_keepalive_connections=5),
+        ) as client:
+
+            for job_id in job_ids:
+                try:
+                    response = client.get(
+                        f"/api/v1/jobs/match/{job_id}", headers=headers
+                    )
+                    if response.status_code == 200:
+                        job_data = response.json()
+                        cleaned_job = JobService._clean_job_data(job_data)
+                        jobs.append(Job(**cleaned_job))
+                    else:
+                        logger.error(
+                            f"(sync) HTTP error fetching job {job_id}: Status {response.status_code}"
+                        )
+                except httpx.TimeoutException:
+                    logger.error(f"(sync) Timeout fetching job {job_id}")
+                except Exception as e:
+                    logger.error(f"(sync) Exception fetching job {job_id}: {str(e)}")
 
         return jobs
 

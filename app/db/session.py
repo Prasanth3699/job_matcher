@@ -1,37 +1,65 @@
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, scoped_session
 from app.core.config import get_settings
 
 settings = get_settings()
 
-# Create the database engine
-engine = create_engine(
+# ==============================
+# Async engine/session (FastAPI)
+# ==============================
+# Preserve exported name `engine` for backward compatibility (imports in app.main etc.)
+engine = create_async_engine(
     settings.DATABASE_URL,
-    pool_pre_ping=True,  # Check connections before using them
-    pool_size=20,  # Maintain 20 connections by default
-    max_overflow=10,  # Allow 10 overflow connections under load
-    pool_timeout=30,  # Wait 30 seconds before giving up on getting a connection
-    pool_recycle=3600,  # Recycle connections after 1 hour
+    pool_pre_ping=True,
+    pool_size=20,
+    max_overflow=10,
+    pool_timeout=30,
+    pool_recycle=3600,
 )
 
-# Session factory - use scoped_session for thread safety
-SessionLocal = scoped_session(
-    sessionmaker(
-        autocommit=False,
-        autoflush=False,
-        bind=engine,
-        expire_on_commit=False,  # Better for async operations
-    )
+AsyncSessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine,
+    class_=AsyncSession,
+    expire_on_commit=False,
 )
 
 
-def get_db():
-    """
-    Dependency that yields a DB session.
-    Ensures the session is closed after use.
-    """
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+# Dependency for FastAPI (async)
+async def get_db():
+    async with AsyncSessionLocal() as session:
+        yield session
+
+
+# ===================================
+# Sync engine/session (Celery worker)
+# ===================================
+# Derive a sync DSN by replacing asyncpg with psycopg2 if needed
+def _to_sync_dsn(dsn: str) -> str:
+    # Typical async DSN: postgresql+asyncpg://user:pass@host:5432/db
+    # Sync DSN:          postgresql+psycopg2://user:pass@host:5432/db
+    if dsn.startswith("postgresql+asyncpg://"):
+        return dsn.replace("postgresql+asyncpg://", "postgresql+psycopg2://", 1)
+    return dsn
+
+
+SYNC_DATABASE_URL = _to_sync_dsn(settings.DATABASE_URL)
+
+sync_engine = create_engine(
+    SYNC_DATABASE_URL,
+    pool_pre_ping=True,
+    pool_size=10,
+    max_overflow=5,
+    pool_timeout=30,
+    pool_recycle=3600,
+    future=True,
+)
+
+SyncSessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=sync_engine,
+    expire_on_commit=False,
+)

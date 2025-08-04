@@ -4,7 +4,7 @@ from typing import Annotated
 from ..services.api_models import ResumeUploadRequest
 from app.core.document_processing import ResumeParser, ResumeExtractor
 from app.core.job_processing.service import JobProcessingService
-from app.core.matching.service import MatchingService
+from app.domain.matching.services import MatchingDomainService
 from app.utils.logger import logger
 from app.utils.security import SecurityUtils
 from pathlib import Path
@@ -24,8 +24,8 @@ def get_job_processor() -> JobProcessingService:
     return JobProcessingService()
 
 
-def get_matching_service() -> MatchingService:
-    return MatchingService()
+def get_matching_service() -> MatchingDomainService:
+    return MatchingDomainService()
 
 
 def secure_temp_file(content: str) -> Path:
@@ -41,13 +41,7 @@ def secure_temp_file(content: str) -> Path:
         )
 
 
-def cleanup_temp_file(path: Path):
-    """Cleanup temp file after use"""
-    try:
-        if path.exists():
-            os.unlink(path)
-    except Exception as e:
-        logger.warning(f"Failed to cleanup temp file {path}: {str(e)}")
+# cleanup_temp_file function moved to app.utils.file_processing
 
 
 def get_secure_resume_file(
@@ -71,9 +65,13 @@ def get_secure_resume_file(
 
         return temp_file
     except HTTPException:
+        from app.utils.file_processing import cleanup_temp_file
+
         cleanup_temp_file(temp_file)
         raise
     except Exception as e:
+        from app.utils.file_processing import cleanup_temp_file
+
         cleanup_temp_file(temp_file)
         logger.error(f"Resume file validation failed: {str(e)}")
         raise HTTPException(
