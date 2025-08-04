@@ -20,4 +20,4 @@ __pycache__/
 *.bat
 
 temp*
-model_cache
+model_cache/ 
