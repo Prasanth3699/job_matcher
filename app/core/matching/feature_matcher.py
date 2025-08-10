@@ -256,3 +256,78 @@ class FeatureMatcher:
         intersection = text_words.intersection(keyword_set)
 
         return len(intersection) / len(keyword_set)
+
+    def match_single(self, resume_features: Dict[str, Any], job: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Single job matching interface for ensemble compatibility.
+        
+        Args:
+            resume_features: Features extracted from resume
+            job: Job posting data
+            
+        Returns:
+            Dict with score, confidence, explanation, and model_type
+        """
+        try:
+            # Calculate feature similarities
+            feature_scores = self.calculate_feature_similarity(resume_features, job)
+            
+            # Calculate overall score as weighted average
+            weights = {
+                'skills': 0.4,
+                'experience': 0.25,
+                'title': 0.2,
+                'location': 0.1,
+                'salary': 0.05
+            }
+            
+            overall_score = 0.0
+            total_weight = 0.0
+            
+            for feature, score in feature_scores.items():
+                if feature in weights and score is not None:
+                    overall_score += score * weights[feature]
+                    total_weight += weights[feature]
+            
+            # Normalize if we have any valid scores
+            if total_weight > 0:
+                overall_score = overall_score / total_weight
+            else:
+                overall_score = 0.0
+            
+            # Ensure score is in [0, 1] range
+            overall_score = max(0.0, min(1.0, overall_score))
+            
+            # Calculate confidence based on data completeness
+            available_features = sum(1 for score in feature_scores.values() if score is not None)
+            confidence = min(1.0, available_features / len(weights) + 0.2)
+            
+            return {
+                'score': float(overall_score),
+                'confidence': float(confidence),
+                'explanation': f'Feature-based score: {overall_score:.3f} (based on {available_features} features)',
+                'model_type': 'feature',
+                'feature_breakdown': feature_scores
+            }
+            
+        except Exception as e:
+            logger.error(f"Feature matching error: {str(e)}")
+            return {
+                'score': 0.0,
+                'confidence': 0.0,
+                'explanation': 'Error in feature matching',
+                'model_type': 'feature'
+            }
+
+    def match_batch(self, resume_features: Dict[str, Any], jobs: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """
+        Batch job matching interface for ensemble compatibility.
+        
+        Args:
+            resume_features: Features extracted from resume
+            jobs: List of job posting data
+            
+        Returns:
+            List of match results for each job
+        """
+        return [self.match_single(resume_features, job) for job in jobs]

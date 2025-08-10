@@ -261,11 +261,12 @@ class ModelRegistry:
         try:
             from app.core.matching.feature_matcher import FeatureMatcher
             
+            # FeatureMatcher doesn't accept parameters in its constructor
+            model = FeatureMatcher()
+            
+            # Add configuration as attributes if needed
             config = model_def['config']
-            model = FeatureMatcher(
-                feature_types=config['feature_types'],
-                weighting_strategy=config['weighting_strategy']
-            )
+            model.config = config
             
             return model
             
@@ -305,9 +306,13 @@ class ModelRegistry:
                 
                 similarity = cosine_similarity(resume_embedding, job_embedding)[0][0]
                 
+                # Normalize similarity to [0, 1] range
+                # Cosine similarity is in [-1, 1], so we convert to [0, 1]
+                normalized_score = max(0.0, min(1.0, (similarity + 1.0) / 2.0))
+                
                 return {
-                    'score': float(similarity),
-                    'confidence': min(1.0, float(similarity) + 0.1),
+                    'score': float(normalized_score),
+                    'confidence': min(1.0, max(0.0, float(normalized_score) + 0.1)),
                     'explanation': f'Semantic similarity: {similarity:.3f}',
                     'model_type': 'semantic'
                 }
@@ -335,9 +340,13 @@ class ModelRegistry:
                 
                 results = []
                 for i, similarity in enumerate(similarities):
+                    # Normalize similarity to [0, 1] range
+                    # Cosine similarity is in [-1, 1], so we convert to [0, 1]
+                    normalized_score = max(0.0, min(1.0, (similarity + 1.0) / 2.0))
+                    
                     results.append({
-                        'score': float(similarity),
-                        'confidence': min(1.0, float(similarity) + 0.1),
+                        'score': float(normalized_score),
+                        'confidence': min(1.0, max(0.0, float(normalized_score) + 0.1)),
                         'explanation': f'Semantic similarity: {similarity:.3f}',
                         'model_type': 'semantic'
                     })

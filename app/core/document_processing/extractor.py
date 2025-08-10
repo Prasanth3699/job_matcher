@@ -98,14 +98,27 @@ class ResumeExtractor:
         text = text.strip()
         words = text.split()
 
+        # Length check
         if not (MIN_SKILL_LENGTH <= len(text) <= MAX_SKILL_LENGTH):
+            logger.debug(f"Skill rejected - length: '{text}' (len={len(text)}, min={MIN_SKILL_LENGTH}, max={MAX_SKILL_LENGTH})")
             return False
+        
+        # Word count check
         if len(words) > MAX_WORDS_IN_SKILL:
+            logger.debug(f"Skill rejected - too many words: '{text}' ({len(words)} words)")
             return False
-        if any(w in ENGLISH_STOP_WORDS for w in words):
+        
+        # Stop words check
+        if any(w.lower() in ENGLISH_STOP_WORDS for w in words):
+            stop_words_found = [w for w in words if w.lower() in ENGLISH_STOP_WORDS]
+            logger.debug(f"Skill rejected - contains stop words: '{text}' (stop words: {stop_words_found})")
             return False
+        
+        # Special characters check
         if any(c in "(){}[]<>" for c in text):
+            logger.debug(f"Skill rejected - special characters: '{text}'")
             return False
+        
         return True
 
     def _extract_skills(self, text: str) -> List[str]:
@@ -113,38 +126,88 @@ class ResumeExtractor:
         Extract skills using the HF skill‐NER pipeline first, then fall back
         to spaCy noun‐chunk/entity/token heuristics if needed.
         """
+        # Debug logging
+        text_length = len(text) if text else 0
+        text_preview = (text[:200] + "...") if text and len(text) > 200 else text
+        logger.info(f"Extracting skills from text: length={text_length}, preview={text_preview}")
+        
         skills = set()
 
         # 1) Transformer‐based extraction (highest precision/recall)
         if self.skill_ner:
             try:
-                for ent in self.skill_ner(text):
+                if not text or not text.strip():
+                    logger.warning("Empty text provided to HF skill-NER")
+                    ner_results = []
+                else:
+                    ner_results = self.skill_ner(text)
+                    
+                logger.info(f"HF skill-NER found {len(ner_results)} entities")
+                
+                # Debug: log all entities found
+                if ner_results:
+                    logger.debug(f"Raw NER entities: {ner_results}")
+                
+                for ent in ner_results:
                     word = ent["word"].strip().lower()
+                    logger.debug(f"Processing entity: '{word}' (confidence: {ent.get('score', 'N/A')})")
                     if self._is_valid_skill(word):
                         skills.add(word)
+                        logger.debug(f"✓ Added skill: {word}")
+                    else:
+                        logger.debug(f"✗ Rejected skill: {word} (failed validation)")
             except Exception as e:
                 logger.warning(f"Skill‐NER pipeline failed: {e}")
+        else:
+            logger.warning("HF skill-NER pipeline not available")
 
-        # 2) Fallback: spaCy heuristics if no skills found :contentReference[oaicite:9]{index=9}
+        # 2) Fallback: spaCy heuristics if no skills found
         if not skills:
+            logger.info("No skills found with HF model, using spaCy fallback")
             doc = self.nlp(text)
+            
+            # Common tech skills to look for as a basic fallback
+            common_tech_skills = {
+                "python", "java", "javascript", "react", "node", "sql", "html", "css",
+                "docker", "kubernetes", "aws", "azure", "git", "linux", "mongodb", 
+                "postgresql", "redis", "elasticsearch", "django", "flask", "spring",
+                "angular", "vue", "typescript", "golang", "rust", "scala", "kotlin",
+                "machine learning", "artificial intelligence", "data science", "tensorflow",
+                "pytorch", "pandas", "numpy", "scikit-learn", "api", "rest", "graphql"
+            }
+            
+            # Check for common tech skills in text
+            text_lower = text.lower()
+            for skill in common_tech_skills:
+                if skill in text_lower:
+                    skills.add(skill)
+                    logger.debug(f"Added common skill: {skill}")
+            
             # noun chunks
             for chunk in doc.noun_chunks:
                 word = chunk.text.lower().strip()
                 if self._is_valid_skill(word):
                     skills.add(word)
+                    logger.debug(f"Added skill from noun chunk: {word}")
+            
             # named entities labeled SKILL or TECH
             for ent in doc.ents:
                 if ent.label_ in {"SKILL", "TECH"}:
                     word = ent.text.lower().strip()
                     if self._is_valid_skill(word):
                         skills.add(word)
-            # single tokens
+                        logger.debug(f"Added skill from named entity: {word}")
+            
+            # single tokens (more selective)
             for token in doc:
                 w = token.text.lower().strip()
                 if token.pos_ in {"NOUN", "PROPN"} and self._is_valid_skill(w):
-                    skills.add(w)
-        logger.info(f"Extracted skills using fallback method: {skills}")
+                    # Only add if it looks like a technical term
+                    if len(w) >= 3 and any(char.isalnum() for char in w):
+                        skills.add(w)
+                        logger.debug(f"Added skill from token: {w}")
+        
+        logger.info(f"Final extracted skills: {sorted(skills)}")
         return sorted(skills)
 
     def _extract_experiences(self, doc: Doc) -> List[Dict[str, Any]]:
